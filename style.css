@@ -1,3 +1,20 @@
+/* CSS Custom Properties */
+:root {
+    --ifm-color-primary: #2ec4f1;
+    --ifm-color-primary-dark: #1b7ca6;
+    --ifm-color-primary-darker: #176b8a;
+    --ifm-color-primary-darkest: #124e66;
+    --ifm-color-primary-light: #5fd6f7;
+    --ifm-color-primary-lighter: #8fe7fd;
+    --ifm-color-primary-lightest: #c6f4ff;
+    --ifm-code-font-size: 95%;
+    --docusaurus-highlighted-code-line-bg: rgba(46, 196, 241, 0.07);
+    --header-font-color: #181c24;
+    --body-background: #f6fcff;
+    --body-font-color: #181c24;
+    --accent-gradient: linear-gradient(90deg, #2e4af1 0%, #5a2ef1 100%);
+}
+
 /* Reset and base styles */
 * {
     margin: 0;
@@ -7,9 +24,9 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--body-background);
     min-height: 100vh;
-    color: #333;
+    color: var(--body-font-color);
 }
 
 .container {
@@ -22,29 +39,28 @@ body {
 header {
     text-align: center;
     margin-bottom: 3rem;
-    color: white;
+    color: var(--header-font-color);
 }
 
 header h1 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 header p {
     font-size: 1.1rem;
-    opacity: 0.9;
+    opacity: 0.8;
     margin-bottom: 1.5rem;
 }
 
 /* Price Controls */
 .price-controls {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 1rem;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(46, 196, 241, 0.1);
     margin-top: 20px;
 }
 
@@ -53,7 +69,7 @@ header p {
     font-size: 0.9rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: white;
+    color: var(--ifm-color-primary-darkest);
 }
 
 .price-input-group {
@@ -65,27 +81,27 @@ header p {
 #btcPrice {
     flex: 1;
     padding: 0.75rem;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid var(--ifm-color-primary-lighter);
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
-    background: rgba(255, 255, 255, 0.9);
-    color: #2d3748;
+    background: white;
+    color: var(--body-font-color);
     transition: all 0.2s ease;
 }
 
 #btcPrice:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: var(--ifm-color-primary);
     background: white;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    box-shadow: 0 0 0 3px rgba(46, 196, 241, 0.1);
 }
 
 .refresh-btn {
     padding: 0.75rem 1rem;
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--ifm-color-primary);
     color: white;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid var(--ifm-color-primary);
     border-radius: 8px;
     font-size: 0.9rem;
     font-weight: 600;
@@ -95,8 +111,8 @@ header p {
 }
 
 .refresh-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.5);
+    background: var(--ifm-color-primary-dark);
+    border-color: var(--ifm-color-primary-dark);
     transform: translateY(-1px);
 }
 
@@ -114,15 +130,15 @@ header p {
 
 .denomination-btn {
     background: white;
-    border: 2px solid #e1e5e9;
+    border: 2px solid var(--ifm-color-primary-lighter);
     border-radius: 12px;
     padding: 1.5rem 1rem;
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    color: #4a5568;
+    box-shadow: 0 2px 8px rgba(46, 196, 241, 0.1);
+    color: var(--body-font-color);
     text-align: center;
     min-height: 80px;
     display: flex;
@@ -132,16 +148,16 @@ header p {
 
 .denomination-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    border-color: #667eea;
+    box-shadow: 0 4px 16px rgba(46, 196, 241, 0.2);
+    border-color: var(--ifm-color-primary);
 }
 
 .denomination-btn.selected {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--ifm-color-primary-dark);
     color: white;
-    border-color: #5a67d8;
+    border-color: var(--ifm-color-primary-darkest);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 6px 20px rgba(46, 196, 241, 0.4);
 }
 
 .denomination-btn:active {
@@ -168,31 +184,31 @@ header p {
     background: white;
     border-radius: 16px;
     padding: 2rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(46, 196, 241, 0.1);
     text-align: center;
 }
 
 .total-display h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: #2d3748;
+    color: var(--header-font-color);
 }
 
 #totalAmount {
-    color: #667eea;
+    color: var(--ifm-color-primary);
     font-weight: 700;
 }
 
 .usd-value {
     font-size: 1.2rem;
-    color: #48bb78;
+    color: var(--ifm-color-primary-dark);
     font-weight: 600;
     margin: 0.5rem 0;
     opacity: 0.9;
 }
 
 #usdAmount {
-    color: #38a169;
+    color: var(--ifm-color-primary-darker);
 }
 
 .selected-count {
@@ -210,7 +226,7 @@ header p {
 .msat-values label {
     display: block;
     font-size: 0.9rem;
-    color: #4a5568;
+    color: var(--ifm-color-primary-darkest);
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
@@ -224,24 +240,24 @@ header p {
 #msatValues {
     flex: 1;
     padding: 0.75rem;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--ifm-color-primary-lighter);
     border-radius: 8px;
     font-size: 0.9rem;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-    background-color: #f7fafc;
-    color: #2d3748;
+    background-color: white;
+    color: var(--body-font-color);
     transition: border-color 0.2s ease;
 }
 
 #msatValues:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: var(--ifm-color-primary);
     background-color: white;
 }
 
 .copy-btn {
     padding: 0.75rem 1rem;
-    background: #667eea;
+    background: var(--ifm-color-primary);
     color: white;
     border: none;
     border-radius: 8px;
@@ -253,7 +269,7 @@ header p {
 }
 
 .copy-btn:hover:not(:disabled) {
-    background: #5a67d8;
+    background: var(--ifm-color-primary-dark);
     transform: translateY(-1px);
 }
 
@@ -268,7 +284,7 @@ header p {
 }
 
 .copy-btn.copied {
-    background: #48bb78;
+    background: var(--ifm-color-primary-darker);
     animation: copySuccess 0.3s ease;
 }
 
@@ -283,14 +299,14 @@ header p {
     background: white;
     border-radius: 16px;
     padding: 2rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(46, 196, 241, 0.1);
     text-align: center;
 }
 
 .qr-display h3 {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
-    color: #2d3748;
+    color: var(--header-font-color);
 }
 
 .qr-container {
@@ -371,7 +387,7 @@ header p {
 
 /* Focus styles for accessibility */
 .denomination-btn:focus {
-    outline: 3px solid #667eea;
+    outline: 3px solid var(--ifm-color-primary);
     outline-offset: 2px;
 }
 
@@ -390,7 +406,7 @@ header p {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: #2d3748;
+    background: var(--header-font-color);
     color: white;
     padding: 1rem 1.5rem;
     border-radius: 8px;
@@ -414,7 +430,7 @@ header p {
 }
 
 .toast.success {
-    background: #38a169;
+    background: var(--ifm-color-primary-darker);
 }
 
 .toast.warning {
