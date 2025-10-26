@@ -6,6 +6,7 @@ const MAX_SELECTIONS = 4;
 let selectedDenominations = new Set();
 let totalAmount = 0;
 let btcUsdRate = null;
+let qrImages = {}; // Cache for preloaded QR images
 
 // SI prefixes for display (converting from msat to appropriate units)
 const SI_PREFIXES = [
@@ -198,6 +199,29 @@ function updateTotal() {
     }
 }
 
+// Preload all QR images
+function preloadQRImages() {
+    const imagePromises = [];
+
+    for (let i = 0; i <= 4; i++) {
+        const img = new Image();
+        const qrPath = `example_notes/ecash_000${i}.png`;
+
+        const promise = new Promise((resolve, reject) => {
+            img.onload = () => {
+                qrImages[i] = img;
+                resolve();
+            };
+            img.onerror = reject;
+            img.src = qrPath;
+        });
+
+        imagePromises.push(promise);
+    }
+
+    return Promise.all(imagePromises);
+}
+
 // Update QR code display based on number of selected denominations
 function updateQRCode() {
     const qrImage = document.getElementById('qrImage');
@@ -205,17 +229,14 @@ function updateQRCode() {
 
     const count = selectedDenominations.size;
     const qrNumber = Math.min(count, 4); // Cap at 4 for the example images
-    const qrPath = `example_notes/ecash_000${qrNumber}.png`;
 
-    // Add loading state
-    qrImage.classList.remove('loaded');
+    // Use preloaded image if available, otherwise fallback to src
+    if (qrImages[qrNumber]) {
+        qrImage.src = qrImages[qrNumber].src;
+    } else {
+        qrImage.src = `example_notes/ecash_000${qrNumber}.png`;
+    }
 
-    // Set up image load handler
-    qrImage.onload = () => {
-        qrImage.classList.add('loaded');
-    };
-
-    qrImage.src = qrPath;
     qrImage.alt = `QR Code density preview for ${count} denominations`;
 
     if (count === 0) {
@@ -264,6 +285,14 @@ function copyToClipboard() {
 async function initializeApp() {
     const denominations = generateDenominations();
     const grid = document.getElementById('denominationsGrid');
+
+    // Preload QR images first
+    try {
+        await preloadQRImages();
+        console.log('QR images preloaded successfully');
+    } catch (error) {
+        console.warn('Failed to preload some QR images:', error);
+    }
 
     // Create and add denomination buttons
     denominations.forEach(denomination => {
