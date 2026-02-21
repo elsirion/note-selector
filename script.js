@@ -23,10 +23,10 @@ function generateDenominations() {
     const denominations = [];
     let currentDenomination = MIN_DENOMINATION_MSAT;
 
-    // Generate denominations up to roughly 500 ksat
-    // 500 ksat = 500,000 sat = 500,000,000 msat
-    // 2^29 = 536,870,912 msat ≈ 537 ksat (close to 500 ksat)
-    for (let i = 10; i <= 29; i++) {
+    // Generate denominations up to roughly 17 Msat
+    // 2^29 = 536,870,912 msat ≈ 537 ksat
+    // 2^34 = 17,179,869,184 msat ≈ 17.2 Msat
+    for (let i = 10; i <= 34; i++) {
         const amount = 2 ** i;
         denominations.push({
             value: amount,
